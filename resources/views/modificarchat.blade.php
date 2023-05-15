@@ -1,85 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
+
+
+
+<?php
+// SDK de Mercado Pago
+require base_path('vendor/autoload.php');
+// Agrega credenciales
+$public_token = 'TEST-5019845118886647-051118-719524aa010527b4bbe515977130e3c7-441345460';
+MercadoPago\SDK::setAccessToken($public_token);
+
+$preference = new MercadoPago\Preference();
+
+// Crea un ítem en la preferencia
+$item = new MercadoPago\Item();
+$item->title = 'Mi producto';
+$item->quantity = 1;
+$item->unit_price = 700;
+$preference->items = array($item);
+
+$preference->back_urls = array(
+              "success" => "http://127.0.0.1:8000/subscripcion",
+              "failure" => "http://127.0.0.1:8000/pagoFallido"
+);
+$preference->auto_return = "approved";
+$preference->binary_mode = true;  
+
+$preference->save();
+?>
+
 <div>
 
             <div class="">
               <div >
                 <div class="card-body p-4 p-xl-6">
                   <h2 class="text-100 text-center">Modifica tu ChatBot:</h2>
-                  <form class="mb-3">
-                    <div class="form-floating mb-3">
-                      <input class="form-control input-box form-ensurance-header-control " id="floatingEmail" type="email" placeholder="name@example.com" />
-                      <label for="floatingName">Ingresa el nombre de tu empresa:</label>
-                      
-                    </div>
-                    <br></br>
-                    <div >
-                    <h3 class="text-100 text-center">Saludos del bot:</h3>
-</div>
-                    <div class="form-floating mb-3">
-
-                      <input class="form-control input-box form-ensurance-header-control" id="floatingTextarea" type="text" placeholder="name@example.com" />
-                      <label for="floatingPhone">Saludo</label>
-                    </div>
-
-                    <br></br>
-                    <div >
-                    <h3 class="text-100 text-center">Menu del bot:</h3>
-</div>
-<div >
-<input type="radio" id="html" name="fav_language" value="HTML">
-<label for="html">Texto  /  </label>
-<input type="radio" id="css" name="fav_language" value="CSS">
-<label for="css">Boton  /  </label>
-<input type="radio" id="javascript" name="fav_language" value="JavaScript">
-<label for="javascript">Lista</label>
-</div>
-                    <div class="form-floating mb-3">
-                      <textarea class="form-control input-box form-ensurance-header-control" id="floatingTextarea" placeholder="Leave a comment here"></textarea>
-                      <label for="floatingTextarea">Menu 1</label>
-                    </div>
-                    <div class="col-12 d-grid">
-                    <div class="form-floating mb-3">
-                      <input class="form-control input-box form-ensurance-header-control1 " id="floatingEmail" type="email" placeholder="name@example.com" />
-                      <label for="floatingName">Menu 2</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input class="form-control input-box form-ensurance-header-control1" id="floatingTextarea" type="tel" placeholder="name@example.com" />
-                      <label for="floatingPhone">Menu 3</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input class="form-control input-box form-ensurance-header-control1" id="floatingTextarea" type="email" placeholder="name@example.com" />
-                      <label for="floatingEmail">Menu 4</label>
-                    </div>
-                    <br></br>
-                    <div >
-                    <h3 class="text-100 text-center">Opciones del Menu:</h3>
-</div>
-                    <div class="form-floating mb-3">
-                      <input class="form-control input-box form-ensurance-header-control1" id="floatingTextarea" type="text" placeholder="Insurance Category" />
-                      <label for="floatingCatrgory">Menu 1 Opcion 1</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <textarea class="form-control input-box form-ensurance-header-control1" id="floatingTextarea" placeholder="Leave a comment here"></textarea>
-                      <label for="floatingTextarea">Menu 1 Opcion 2</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input class="form-control input-box form-ensurance-header-control1" id="floatingTextarea" type="text" placeholder="Insurance Category" />
-                      <label for="floatingCatrgory">Menu 2 Opcion 1</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <textarea class="form-control input-box form-ensurance-header-control1" id="floatingTextarea" placeholder="Leave a comment here"></textarea>
-                      <label for="floatingTextarea">Menu 2 Opcion 2</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input class="form-control input-box form-ensurance-header-control1" id="floatingTextarea" type="text" placeholder="Insurance Category" />
-                      <label for="floatingCatrgory">Menu 3 Opcion 1</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <textarea class="form-control input-box form-ensurance-header-control1" id="floatingTextarea" placeholder="Leave a comment here"></textarea>
-                      <label for="floatingTextarea">Menu 3 Opcion 2</label>
-                    </div>
+                  
                     <div class="col-12 d-grid">
                       <button class="btn btn-primary rounded-pill" type="submit">Enviar</button>
                     </div>
@@ -89,5 +46,28 @@
             </div>
           </div>
         </div>
+        <div class="cho-container"></div>
+        <script src="https://sdk.mercadopago.com/js/v2"></script>
+        
+        <script>
+          
+          var public_key = 'TEST-936aced5-23e0-453a-b259-defa7acf00da'
+const mp = new MercadoPago(public_key, {
+locale: 'es-CL'
+});
+
+mp.checkout({
+preference: {
+id: '<?php echo $preference->id; ?>'
+},
+render: {
+container: '.cho-container',
+label: 'Pagar',
+}
+});
+</script>
+        
+        
+     
      
 @endsection

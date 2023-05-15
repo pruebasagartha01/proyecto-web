@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
         return view('home');
     }
        /**
@@ -40,5 +41,23 @@ class HomeController extends Controller
         return view('modificarchat');
     }
 
+    public function index3()
+    {
+        return view('miPerfil');
+    }
 
+    public function index4()
+    {
+        return view('pagoExitoso');
+    }
+
+    public function index5()
+    {
+        return view('pagoFallido');
+    }
+
+    public function index6()
+    {
+        return view('subscripcion');
+    }
 }

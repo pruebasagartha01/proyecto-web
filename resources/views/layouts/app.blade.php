@@ -106,18 +106,19 @@
 
                                 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a  class="dropdown-item" href="perfil"> Mi Perfil
-                                  </a>
+                                
                                     <?php
                                 if(auth()->user()->rol == 'admin'){
                                   ?>
-                                  <a  class="dropdown-item" href="panelAdmin"> Panel Admin
+                                  <a  class="dropdown-item" href="panelAdmin"> Panel Administrador
                                   </a>
+                                 
                                   <?php
                                 }
                                 if(auth()->user()->rol == 'user'){
                                   ?>
-                                
+                                <a  class="dropdown-item" href="miPerfil"> Mi Perfil
+                                  </a>
                                     <a  class="dropdown-item" href="nuevochat">Nuevo Chat
                                     </a>
                                     <a class="dropdown-item" href="modificarchat">Modificar Chat
