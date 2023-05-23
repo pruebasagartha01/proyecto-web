@@ -6,13 +6,13 @@
 
 <div class="card-body">
     
-                    <form id="formularioRegisCurso" action="editarUsuario">
+                   
                         @csrf
 
                         <div class="row text-center" >
                         <div class="col-md-6 form-group ">
-                           
-                                <button type="submit" class="btn btn-primary">
+                        <form action="{{ route('admin.editarUsuario')}}">
+                                <button type="submit" class="btn btn-primary" action="{{ route('admin.editarUsuario')}}">
                                     {{ __('Modificar Usuarios') }}
                                 </button>
                             </div>
@@ -32,7 +32,7 @@
 
 
                        
-                    </form>
+                    
 
                 </div>
                 </div>

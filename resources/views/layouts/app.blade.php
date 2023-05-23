@@ -110,7 +110,7 @@
                                     <?php
                                 if(auth()->user()->rol == 'admin'){
                                   ?>
-                                  <a  class="dropdown-item" href="panelAdmin"> Panel Administrador
+                                  <a  class="dropdown-item" href="{{ route('admin.index') }}"> Panel Administrador
                                   </a>
                                  
                                   <?php

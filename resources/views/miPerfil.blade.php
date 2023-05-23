@@ -26,6 +26,7 @@
                         <label for="saludo" >Tu cuenta fue modificada: {{ Auth::user()->updated_at }}</label>
 
                     </div> 
+                   
                 </div>
                 <br>
 
